@@ -27,12 +27,12 @@ $.noConflict();
         fedWith = (gross - 71 + sadAlienExtra) * .1;
       } 
       let netpay = gross - fedWith - fedMed - fedOasdi - ilWith;
-      $('#paycheck').html(netpay.toFixed(2));
-      $('#gross').html(gross.toFixed(2));
-      $('#fed-withholing').html(fedWith.toFixed(2));
-      $('#il-withholding').html(ilWith.toFixed(2));
-      $('#medicare').html(fedMed.toFixed(2));
-      $('#fed-other').html(fedOasdi.toFixed(2));
+      $('#paycheck').html('$'+netpay.toFixed(2));
+      $('#gross').html('$'+gross.toFixed(2));
+      $('#fed-withholing').html('$'+fedWith.toFixed(2));
+      $('#il-withholding').html('$'+ilWith.toFixed(2));
+      $('#medicare').html('$'+fedMed.toFixed(2));
+      $('#fed-other').html('$'+fedOasdi.toFixed(2));
     }
   });
 })(jQuery);

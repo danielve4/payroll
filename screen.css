@@ -3,14 +3,46 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 html {
   font-size: 1.375em; /* 22px / 16px */
   line-height: 1.1818182em; /* 26px / 18px */
-  background-color: #02a8b2;
-  color: #37003C;
+  background-color: #303030;
+  color: #F7f7f7;
   font-family: "Product Sans","Helvetica Neue", Helvetica, sans-serif;
   font-weight: 500;
 }
 
+h1 {
+  font-size: 1.9531111em;  /*35.156px / 18px = 1.9531111em*/
+  line-height: 1.251564456em; /*44px gridline at 35.156px | 44px / 35.156px = 1.251564456em*/
+  font-weight: 600;
+  display: block;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.5625em;     /*28.125px /18px = 1.5625em*/
+  line-height: 1.1733333em; /*33px = 1.5 gridline at 28.125px*/
+  font-weight: 600;
+}
+
 span, input {
   display: block;
+  margin-bottom: 11px; 
+}
+
+input {
+  height: 2em; 
+  font-size: inherit;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: #f7f7f7;
+  resize: none;
+  color: #000000;
+  border-radius: 0.0877924586em; /*2px | 2/22.781=0.0877924586em*/
+  text-align: center;
+  -webkit-appearance: none;
+  -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+  -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+  box-sizing: border-box;
 }
 
 #page {
