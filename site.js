@@ -20,9 +20,9 @@ $.noConflict();
       if((gross+sadAlienExtra) > 1658) {
         fedWith = (gross - 1658 + sadAlienExtra) * .24 + 271.08;
       } else if((gross+sadAlienExtra) > 815) {
-        fedWith = ((gross+sadAlienExtra) - 815 + sadAlienExtra) * .22 + 85.62;
+        fedWith = (gross - 815 + sadAlienExtra) * .22 + 85.62;
       } else if((gross+sadAlienExtra) > 254) {
-        fedWith = ((gross+sadAlienExtra) - 254 + sadAlienExtra) * .12 + 18.30;
+        fedWith = (gross - 254 + sadAlienExtra) * .12 + 18.30;
       } else if ((gross+sadAlienExtra) > 71 ) {
         fedWith = (gross - 71 + sadAlienExtra) * .1;
       } 
