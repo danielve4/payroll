@@ -26,15 +26,29 @@ $.noConflict();
       } else if ((gross+sadAlienExtra) > 71 ) {
         fedWith = (gross - 71 + sadAlienExtra) * .1;
       } 
+      displayTotals();
+    }
+
+    function displayTotals() {
       let totalDeductions = fedWith + fedMed + fedOasdi + ilWith;
       let netpay = gross - totalDeductions;
-      $('#paycheck').html('$'+netpay.toFixed(2));
-      $('#gross').html('$'+gross.toFixed(2));
-      $('#fed-withholing').html('$'+fedWith.toFixed(2));
-      $('#il-withholding').html('$'+ilWith.toFixed(2));
-      $('#medicare').html('$'+fedMed.toFixed(2));
-      $('#fed-other').html('$'+fedOasdi.toFixed(2));
-      $('#total-deductions').html('$'+totalDeductions.toFixed(2));
+      if(netpay > 0) {
+        $('#paycheck').html('$'+netpay.toFixed(2));
+        $('#gross').html('$'+gross.toFixed(2));
+        $('#fed-withholing').html('$'+fedWith.toFixed(2));
+        $('#il-withholding').html('$'+ilWith.toFixed(2));
+        $('#medicare').html('$'+fedMed.toFixed(2));
+        $('#fed-other').html('$'+fedOasdi.toFixed(2));
+        $('#total-deductions').html('$'+totalDeductions.toFixed(2));
+      } else {
+        $('#paycheck').html('$0');
+        $('#gross').html('$0');
+        $('#fed-withholing').html('$0');
+        $('#il-withholding').html('$0');
+        $('#medicare').html('$0');
+        $('#fed-other').html('$0');
+        $('#total-deductions').html('$0');
+      }
     }
   });
 })(jQuery);
