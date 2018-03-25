@@ -17,13 +17,13 @@ $.noConflict();
       fedMed = gross * 0.0145;
       fedOasdi = gross * .062;
       ilWith = gross * .0495;
-      if(gross > 1658) {
+      if((gross+sadAlienExtra) > 1658) {
         fedWith = (gross - 1658 + sadAlienExtra) * .24 + 271.08;
-      } else if(gross > 815) {
-        fedWith = (gross - 815 + sadAlienExtra) * .22 + 85.62;
-      } else if(gross > 254) {
-        fedWith = (gross - 254 + sadAlienExtra) * .12 + 18.30;
-      } else if (gross > 71 ) {
+      } else if((gross+sadAlienExtra) > 815) {
+        fedWith = ((gross+sadAlienExtra) - 815 + sadAlienExtra) * .22 + 85.62;
+      } else if((gross+sadAlienExtra) > 254) {
+        fedWith = ((gross+sadAlienExtra) - 254 + sadAlienExtra) * .12 + 18.30;
+      } else if ((gross+sadAlienExtra) > 71 ) {
         fedWith = (gross - 71 + sadAlienExtra) * .1;
       } 
       let totalDeductions = fedWith + fedMed + fedOasdi + ilWith;
