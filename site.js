@@ -2,7 +2,7 @@ $.noConflict();
 (function($) {
   $(document).ready(function() {
     var wage=0;regularHours=0;timeHalfHours=0;doubleHours=0;
-    var gross=0;fedWith=0;fedMed=0;fedOasdi=0;ilWith=0;sadAlienExtra=151;
+    var gross=0;fedWith=0;fedMed=0;fedOasdi=0;ilWith=0;sadAlienExtra=307.70;
 
     $('input').on('input',function() {
       calculatePaycheck();
@@ -17,14 +17,14 @@ $.noConflict();
       fedMed = gross * 0.0145;
       fedOasdi = gross * .062;
       ilWith = gross * .0495;
-      if((gross+sadAlienExtra) > 1658) {
-        fedWith = (gross - 1658 + sadAlienExtra) * .24 + 271.08;
-      } else if((gross+sadAlienExtra) > 815) {
-        fedWith = (gross - 815 + sadAlienExtra) * .22 + 85.62;
-      } else if((gross+sadAlienExtra) > 254) {
-        fedWith = (gross - 254 + sadAlienExtra) * .12 + 18.30;
-      } else if ((gross+sadAlienExtra) > 71 ) {
-        fedWith = (gross - 71 + sadAlienExtra) * .1;
+      if((gross+sadAlienExtra) > 3385) {
+        fedWith = (gross - 3385 + sadAlienExtra) * .24 + 553.32;
+      } else if((gross+sadAlienExtra) > 1664) {
+        fedWith = (gross - 1664 + sadAlienExtra) * .22 + 174.70;
+      } else if((gross+sadAlienExtra) > 519) {
+        fedWith = (gross - 519 + sadAlienExtra) * .12 + 37.30;
+      } else if ((gross+sadAlienExtra) > 146 ) {
+        fedWith = (gross - 146 + sadAlienExtra) * .10;
       } 
       displayTotals();
     }
