@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <title>Weekly Payroll</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
   <meta name="theme-color" content="#000000" />
-  <link rel="stylesheet" media="screen" href="./screen.css" />
-  <link href='https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i' rel='stylesheet' type='text/css'>
+  <!-- <link rel="stylesheet" media="screen" href="./screen.css" /> -->
+  <!-- <link href='https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i' rel='stylesheet' type='text/css'> -->
 </head>
 
 <body>
@@ -35,13 +35,13 @@
             <input type="number" id="time-half-hours" name="time-half-hours" />
           </li>
           <li>
-            <label for="double-hours">Double time hours (optional)</option>:</label>
+            <label for="double-hours">Double time hours (optional):</label>
             <input type="number" id="double-hours" name="double-hours" />
           </li>
         </ol>
       </form>
     </article>
-    <article>
+    <article id="deduction-breakdown">
       Gross payment: <span id="gross">$0.00</span>
       Federal withholding: <span id="fed-withholing">$0.00</span>
       Illinois withholding: <span id="il-withholding">$0.00</span>
@@ -50,8 +50,8 @@
       Total deductions: <span id="total-deductions">$0.00</span>
     </article>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="./site.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+  <!-- <script src="./site.js"></script> -->
 </body>
 
 </html>
