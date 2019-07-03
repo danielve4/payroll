@@ -15,18 +15,30 @@
     <header>
       <h1>Bi-Weekly Payroll</h1>
     </header>
-    <span>Approximate Paycheck:</span>
-    <h2><span id="paycheck">$0.00</span></h2>
     <article id="controls">
       <form id="payroll-form" name="payroll-form">
-        <label for="wage">Hourly wage:</label>
-        <input type="number" id="wage" name="wage" />
-        <label for="regular-hours">Hours worked (regular wage):</label>
-        <input type="number" id="regular-hours" name="regular-hours" />
-        <label for="time-half-hours">Time and a half hours (optional):</label>
-        <input type="number" id="time-half-hours" name="time-half-hours" />
-        <label for="double-hours">Double time hours (optional)</option>:</label>
-        <input type="number" id="double-hours" name="double-hours" />
+        <h2>
+          Approximate Paycheck:
+          <output id="paycheck" name="paycheck" for="wage regular-hours time-half-hours double-hours">$0.00</output>
+        </h2>
+        <ol>
+          <li>
+            <label for="wage">Hourly wage:</label>
+            <input type="number" id="wage" name="wage" />
+          </li>
+          <li>
+            <label for="regular-hours">Hours worked (regular wage):</label>
+            <input type="number" id="regular-hours" name="regular-hours" />
+          </li>
+          <li>
+            <label for="time-half-hours">Time and a half hours (optional):</label>
+            <input type="number" id="time-half-hours" name="time-half-hours" />
+          </li>
+          <li>
+            <label for="double-hours">Double time hours (optional)</option>:</label>
+            <input type="number" id="double-hours" name="double-hours" />
+          </li>
+        </ol>
       </form>
     </article>
     <article>
