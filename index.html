@@ -42,12 +42,39 @@
       </form>
     </article>
     <article id="deduction-breakdown">
-      Gross payment: <span id="gross">$0.00</span>
+      <h2>Deduction Breakdown</h2>
+      <ul>
+        <li>
+          Gross Payment: <output id="gross" form="payroll-form"
+            for="wage regular-hours time-half-hours double-hours">$0.00</output>
+        </li>
+        <li>
+          Federal withholding: <output id="fed-withholing" form="payroll-form"
+            for="wage regular-hours time-half-hours double-hours">$0.00</output>
+        </li>
+        <li>
+          Illinois withholding: <output id="il-withholding" form="payroll-form"
+            for="wage regular-hours time-half-hours double-hours">$0.00</output>
+        </li>
+        <li>
+          Medicare: <output id="medicare" form="payroll-form"
+            for="wage regular-hours time-half-hours double-hours">$0.00</output>
+        </li>
+        <li>
+          Fed Other: <output id="fed-other" form="payroll-form"
+            for="wage regular-hours time-half-hours double-hours">$0.00</output>
+        </li>
+        <li>
+          Total deductions: <output id="total-deductions" form="payroll-form"
+            for="wage regular-hours time-half-hours double-hours">$0.00</output>
+        </li>
+      </ul>
+      <!-- Gross payment: <span id="gross">$0.00</span>
       Federal withholding: <span id="fed-withholing">$0.00</span>
       Illinois withholding: <span id="il-withholding">$0.00</span>
       Medicare: <span id="medicare">$0.00</span>
       Fed Other: <span id="fed-other">$0.00</span>
-      Total deductions: <span id="total-deductions">$0.00</span>
+      Total deductions: <span id="total-deductions">$0.00</span> -->
     </article>
   </div>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
