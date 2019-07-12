@@ -5,6 +5,12 @@ class UI {
     this.regularHoursInput = document.getElementById('regular-hours');
     this.timeHalfHoursInput = document.getElementById('time-half-hours');
     this.doubleHoursInput = document.getElementById('double-hours');
+    this.gross = document.getElementById('gross');
+    this.federalWithholding = document.getElementById('fed-withholing');
+    this.illinoisWithholding = document.getElementById('il-withholding');
+    this.medicareWithholding = document.getElementById('medicare-withholing');
+    this.federalOtherWithholding = document.getElementById('fed-other-withholing');
+    this.totalDeductions = document.getElementById('total-deductions');
   }
 
   getValueOf(input) {
@@ -12,13 +18,13 @@ class UI {
     else return 0.00;
   }
 
-  setPaycheck(value) {
-    this.paycheckOutput.textContent = value;
+  setValueFor(attribute, value) {
+    attribute.textContent = `\$${value.toFixed(2)}`;
   }
 
   registerEventListener(fn) {
     this.wageInput.addEventListener('input', fn);
-    this.regularHoursInput.addEventListener('input',fn)
+    this.regularHoursInput.addEventListener('input', fn)
     this.timeHalfHoursInput.addEventListener('input', fn);
     this.doubleHoursInput.addEventListener('input', fn);
   }
@@ -38,21 +44,30 @@ class UI {
   const ui = new UI();
   function calculateGross() {
     let wage = ui.getValueOf(ui.wageInput);
-    let gross = wage * ui.getValueOf(ui.regularHoursInput);
-    gross += (wage * 1.5) * ui.getValueOf(ui.timeHalfHoursInput);
-    gross += (wage * 2) * ui.getValueOf(ui.doubleHoursInput);
-    return gross;
+    if (wage > 0) {
+      let gross = wage * ui.getValueOf(ui.regularHoursInput);
+      gross += (wage * 1.5) * ui.getValueOf(ui.timeHalfHoursInput);
+      gross += (wage * 2) * ui.getValueOf(ui.doubleHoursInput);
+      return gross;
+    } else return 0.00;
   }
   function calculateDeductions(gross) {
-    let fedMedWithholding = gross * fedMedRate;
-    let fedOasdiWithholding = gross * fedOasdiRate;
-    let illinoisWithholding = gross * illinoisRate;
-    let federalWithholding = calculateFederalWithholding(gross);
-    return fedMedWithholding + fedOasdiWithholding + illinoisWithholding + federalWithholding;
+    const fedMedWithholding = gross * fedMedRate;
+    const fedOasdiWithholding = gross * fedOasdiRate;
+    const illinoisWithholding = gross * illinoisRate;
+    const federalWithholding = calculateFederalWithholding(gross);
+    const totalDeductions = fedMedWithholding + fedOasdiWithholding + illinoisWithholding + federalWithholding;
+    ui.setValueFor(ui.medicareWithholding, fedMedWithholding);
+    ui.setValueFor(ui.federalOtherWithholding, fedOasdiWithholding);
+    ui.setValueFor(ui.illinoisWithholding, illinoisWithholding);
+    ui.setValueFor(ui.federalWithholding, federalWithholding);
+    ui.setValueFor(ui.totalDeductions, totalDeductions);
+    return totalDeductions;
   }
 
   function calculatePaycheck() {
     let gross = calculateGross();
+    ui.setValueFor(ui.gross, gross);
     if (gross > 0) {
       let paycheck = gross - calculateDeductions(gross);
       return paycheck;
@@ -62,76 +77,16 @@ class UI {
   function calculateFederalWithholding(gross) {
     gross += sadAlienExtra;
     let federalWithholding = 0.00;
-    let done = false;
-    let payGrade = federalRate.length - 1;
-    while (!done && payGrade >= 0) {
+    let payGrade = federalRate.length;
+    while (payGrade--) {
       if (gross > federalRate[payGrade][0]) {
         federalWithholding = (gross - federalRate[payGrade][0]) * federalRate[payGrade][1] + federalRate[payGrade][2];
-        done = true;
-      } else payGrade--;
+        payGrade = 0;
+      }
     }
     return federalWithholding;
   }
   ui.registerEventListener(() => {
-    console.time('paycheck');
-    let paycheck = calculatePaycheck();
-    console.timeEnd('paycheck');
-    ui.setPaycheck(`\$${paycheck.toFixed(2)}`);
+    ui.setValueFor(ui.paycheckOutput, calculatePaycheck());
   });
 })();
-
-
-// $.noConflict();
-// (function($) {
-//   $(document).ready(function() {
-//     var wage=0;regularHours=0;timeHalfHours=0;doubleHours=0;
-//     var gross=0;fedWith=0;fedMed=0;fedOasdi=0;ilWith=0;sadAlienExtra=307.70;
-
-//     $('input').on('input',function() {
-//       calculatePaycheck();
-//     });
-    
-//     function calculatePaycheck() {
-//       wage = $('#wage').val();
-//       regularHours = $('#regular-hours').val();
-//       timeHalfHours = $('#time-half-hours').val();
-//       doubleHours = $('#double-hours').val();
-//       gross = wage*regularHours + (wage*1.5)*timeHalfHours + (wage*2)*doubleHours;
-//       fedMed = gross * 0.0145;
-//       fedOasdi = gross * .062;
-//       ilWith = gross * .0495;
-//       if((gross+sadAlienExtra) > 3385) {
-//         fedWith = (gross - 3385 + sadAlienExtra) * .24 + 553.32;
-//       } else if((gross+sadAlienExtra) > 1664) {
-//         fedWith = (gross - 1664 + sadAlienExtra) * .22 + 174.70;
-//       } else if((gross+sadAlienExtra) > 519) {
-//         fedWith = (gross - 519 + sadAlienExtra) * .12 + 37.30;
-//       } else if ((gross+sadAlienExtra) > 146 ) {
-//         fedWith = (gross - 146 + sadAlienExtra) * .10;
-//       } 
-//       displayTotals();
-//     }
-
-//     function displayTotals() {
-//       let totalDeductions = fedWith + fedMed + fedOasdi + ilWith;
-//       let netpay = gross - totalDeductions;
-//       if(netpay > 0) {
-//         $('#paycheck').html('$'+netpay.toFixed(2));
-//         $('#gross').html('$'+gross.toFixed(2));
-//         $('#fed-withholing').html('$'+fedWith.toFixed(2));
-//         $('#il-withholding').html('$'+ilWith.toFixed(2));
-//         $('#medicare').html('$'+fedMed.toFixed(2));
-//         $('#fed-other').html('$'+fedOasdi.toFixed(2));
-//         $('#total-deductions').html('$'+totalDeductions.toFixed(2));
-//       } else {
-//         $('#paycheck').html('$0');
-//         $('#gross').html('$0');
-//         $('#fed-withholing').html('$0');
-//         $('#il-withholding').html('$0');
-//         $('#medicare').html('$0');
-//         $('#fed-other').html('$0');
-//         $('#total-deductions').html('$0');
-//       }
-//     }
-//   });
-// })(jQuery);
