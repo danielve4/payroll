@@ -30,63 +30,85 @@ class UI {
   }
 }
 
-(() => {
-  const fedMedRate = 0.0145;
-  const fedOasdiRate = 0.062;
-  const illinoisRate = 0.0495;
-  const federalRate = [
-    [146, 0.10, 0.00],
-    [519, 0.12, 37.30],
-    [1664, 0.22, 174.70],
-    [3385, 0.24, 553.32]
-  ];
-  const sadAlienExtra = 307.70;
-  const ui = new UI();
-  function calculateGross() {
-    let wage = ui.getValueOf(ui.wageInput);
-    if (wage > 0) {
-      let gross = wage * ui.getValueOf(ui.regularHoursInput);
-      gross += (wage * 1.5) * ui.getValueOf(ui.timeHalfHoursInput);
-      gross += (wage * 2) * ui.getValueOf(ui.doubleHoursInput);
-      return gross;
+class Paycheck {
+  constructor() {
+    this.sadAlienExtra = 307.70;
+    this.medicareRate = 0.0145;
+    this.fedOasdiRate = 0.062;
+    this.illinoisRate = 0.0495;
+    this.federalRate = [
+      [146, 0.10, 0.00],
+      [519, 0.12, 37.30],
+      [1664, 0.22, 174.70],
+      [3385, 0.24, 553.32]
+    ];
+    this.wage = 0.00;
+    this.regularHours = 0.00;
+    this.timeHalfHours = 0.00;
+    this.doubleHours = 0.00;
+    this.gross = 0.00;
+    this.medicareWithholding = 0.00;
+    this.fedOasdiWithholding = 0.00;
+    this.illinoisWithholding = 0.00;
+    this.federalWithholding = 0.00;
+    this.totalDeductions = 0.00;
+    this.paycheck = 0.00;
+  }
+
+  calculateGross() {
+    if (this.wage > 0) {
+      let tempGross = this.wage * this.regularHours;
+      tempGross += (this.wage * 1.5) * this.timeHalfHours;
+      tempGross += (this.wage * 2) * this.doubleHours;
+      return tempGross;
     } else return 0.00;
   }
-  function calculateDeductions(gross) {
-    const fedMedWithholding = gross * fedMedRate;
-    const fedOasdiWithholding = gross * fedOasdiRate;
-    const illinoisWithholding = gross * illinoisRate;
-    const federalWithholding = calculateFederalWithholding(gross);
-    const totalDeductions = fedMedWithholding + fedOasdiWithholding + illinoisWithholding + federalWithholding;
-    ui.setValueFor(ui.medicareWithholding, fedMedWithholding);
-    ui.setValueFor(ui.federalOtherWithholding, fedOasdiWithholding);
-    ui.setValueFor(ui.illinoisWithholding, illinoisWithholding);
-    ui.setValueFor(ui.federalWithholding, federalWithholding);
-    ui.setValueFor(ui.totalDeductions, totalDeductions);
-    return totalDeductions;
+
+  calculateDeductions() {
+    this.medicareWithholding = this.gross * this.medicareRate;
+    this.fedOasdiWithholding = this.gross * this.fedOasdiRate;
+    this.illinoisWithholding = this.gross * this.illinoisRate;
+    this.federalWithholding = this.calculateFederalWithholding();
+    return this.medicareWithholding + this.fedOasdiWithholding + this.illinoisWithholding + this.federalWithholding;
   }
 
-  function calculatePaycheck() {
-    let gross = calculateGross();
-    ui.setValueFor(ui.gross, gross);
-    if (gross > 0) {
-      let paycheck = gross - calculateDeductions(gross);
-      return paycheck;
-    } else return 0;
-  }
-
-  function calculateFederalWithholding(gross) {
-    gross += sadAlienExtra;
-    let federalWithholding = 0.00;
-    let payGrade = federalRate.length;
+  calculateFederalWithholding() {
+    let withholding = 0.00;
+    let payGrade = this.federalRate.length;
+    let federalGross = this.gross + this.sadAlienExtra;
     while (payGrade--) {
-      if (gross > federalRate[payGrade][0]) {
-        federalWithholding = (gross - federalRate[payGrade][0]) * federalRate[payGrade][1] + federalRate[payGrade][2];
+      if (federalGross > this.federalRate[payGrade][0]) {
+        withholding = (federalGross - this.federalRate[payGrade][0]) * this.federalRate[payGrade][1] + this.federalRate[payGrade][2];
         payGrade = 0;
       }
     }
-    return federalWithholding;
+    return withholding;
   }
+
+  calculatePaycheck() {
+    this.gross = this.calculateGross();
+    if (this.gross > 0.00) {
+      this.totalDeductions = this.calculateDeductions();
+      this.paycheck = this.gross - this.totalDeductions;
+    } else this.paycheck = 0.00;
+  }
+}
+
+(() => {
+  const ui = new UI();
+  const paycheck = new Paycheck();
   ui.registerEventListener(() => {
-    ui.setValueFor(ui.paycheckOutput, calculatePaycheck());
+    paycheck.wage = ui.getValueOf(ui.wageInput);
+    paycheck.regularHours = ui.getValueOf(ui.regularHoursInput);
+    paycheck.timeHalfHours = ui.getValueOf(ui.timeHalfHoursInput);
+    paycheck.doubleHours = ui.getValueOf(ui.doubleHoursInput);
+    paycheck.calculatePaycheck();
+    ui.setValueFor(ui.paycheckOutput, paycheck.paycheck);
+    ui.setValueFor(ui.gross, paycheck.gross);
+    ui.setValueFor(ui.federalWithholding, paycheck.federalWithholding);
+    ui.setValueFor(ui.illinoisWithholding, paycheck.illinoisWithholding);
+    ui.setValueFor(ui.medicareWithholding, paycheck.medicareWithholding);
+    ui.setValueFor(ui.federalOtherWithholding, paycheck.fedOasdiWithholding);
+    ui.setValueFor(ui.totalDeductions, paycheck.totalDeductions);
   });
 })();
