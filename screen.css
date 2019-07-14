@@ -31,6 +31,7 @@ html {
   padding: 1em; /* 16px */
   font-size: 1.375em; /* 22px / 16px = 1.375em*/
   line-height: 1.309em; /* 28.7984px / 22px = 1.309em*/
+  font-weight: 500;
 }
 
 body {
@@ -39,74 +40,106 @@ body {
 
 #page {
   width: 100%;
+  display: grid;
+  grid-row-gap: 1em; /* 22px */
 }
 
 h1 {
   font-size: 1.714em; /* 37.698px / 22px = 1.714em */
   line-height: 1.309em; /* 49.347px / 37.698px = 1.309em */
-  margin-bottom: 0.25em;
+  font-weight: 900; 
 }
 
 h2 {
   font-size: 1.309em; /* 28.798px / 22px = 1.309em */
-  line-height: 1.309em; /* 28.789px / 22px = 1.309em*/
-  margin-bottom: 0.25em;
+  line-height: 1.309em; /* 28.789px / 22px = 1.309em */
+  font-weight: 700;
 }
 
 article {
-  margin-bottom: 1em;
   width: 100%;
+  display: grid;
+  grid-row-gap: 1em;
 }
 
 form {
   width: 100%;
+  display: grid;
+  grid-row-gap: 1em; /* 22px */
 }
 
 input {
   background-color: var(--gray4);
   color: var(--white);
   text-align: center;
-  font-size: 1.309em;
-  line-height: 1.309em;
-  height: 1.309em;
-  border-radius: 10px;
+  font-size: 1.309em; /* 28.798px / 22px = 1.309em */
+  line-height: 1.309em; /* 28.789px / 22px = 1.309em*/
+  height: 1.309em; /* 28.789px / 22px = 1.309em*/
+  border-radius: 0.3473em; /* 10px / 28.789px = 0.3473em */
   width: 100%;
+  font-weight: 700;
 }
 
 label {
   position: absolute;
   display: flex;
   align-items: center;
-  height: 1.309em;
-  padding-left: 16px;
+  color: var(--gray);
+  height: 1.309em; /* 28.789px / 22px = 1.309em */
+  padding-left: 0.7272em; /* 16px / 22px = 0.7272em */
   left: 0;
-  bottom: 0.2023em;
-  transform: scale(1);
+  bottom: 0.2025em; /* 4.4545px / 22px = 0.2025em */
   transition: 0.3s ease transform;
   transform-origin: top left;
   -moz-transition: 0.3s ease transform;
   -webkit-transition: 0.3s ease transform;
 }
 
-ol {
+ol, ul {
   width: 100%;
+  display: grid;
+  grid-row-gap: 0.5em; /* 11px / 22px = 0.5em */
+}
+
+ol {
+  grid-template-areas: "wage reg-hours"
+                       "time-half-hours time-half-hours"
+                       "double-hours double-hours";
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1em;
 }
 
 ol li {
   position: relative;
-  margin-bottom: 0.5em;
   width: 100%;
   max-width: 100%;
 }
 
+#wage-info {
+  grid-area: wage;
+}
+
+#hours-info {
+  grid-area: reg-hours;
+}
+
+#time-half-hours-info {
+  grid-area: time-half-hours;
+}
+
+#double-hours-info {
+  grid-area: double-hours;
+}
+
 .label-placeholder {
   display: block;
-  height: 1.309em;
+  height: 1.309em; /* 28.789px / 22px = 1.309em*/
 }
 
 input:focus ~ label, input:valid ~ label {
+  color: var(--white);
   transform-origin: bottom;
-  transform: translateY(-130.9%) translateX(-16px);
+  transform: translateY(-130.9%) translateX(-0.7272em); /* 16px / 22px = 0.7272em */
 }
 
 /* #paycheck {
