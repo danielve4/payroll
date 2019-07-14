@@ -27,7 +27,7 @@ https://www.modularscale.com/?22&px&1.30901699437
 html {
   background-color: var(--black);
   color: var(--white);
-  font-family: -apple-system, ".SFNSText-Regular", Helvetica, sans-serif;
+  font-family: -apple-system, ".SFNSText-Regular", Helvetica, Arial, sans-serif;
   padding: 1em; /* 16px */
   font-size: 1.375em; /* 22px / 16px = 1.375em*/
   line-height: 1.309em; /* 28.7984px / 22px = 1.309em*/
@@ -41,7 +41,7 @@ body {
 #page {
   width: 100%;
   display: grid;
-  grid-row-gap: 1em; /* 22px */
+  grid-row-gap: 1.309em; /* 28.7984px / 22px = 1.309em*/
 }
 
 h1 {
