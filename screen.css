@@ -1,50 +1,168 @@
-a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section{display:block}html{line-height:1}body{line-height:inherit}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section{display:block}html{line-height:1}body{line-height:inherit}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}input{-webkit-appearance: none;outline: 0;font-family: inherit;font-size: inherit;border: none;padding: 0;}
+
+/*
+https://www.modularscale.com/?22&px&1.30901699437
+*/
+
+:root {
+  --black: #000000;
+  --white: #FFFFFF;
+  --blue: rgb(10,132,255);
+  --gray: rgb(142,142,147);
+  --green: rgb(48,209,88);
+  --indigo: rgb(94,92,230);
+  --orage: rgb(255,159,10);
+  --pink: rgb(255,55,95);
+  --purple: rgb(192,90,242);
+  --red: rgb(255,69,58);
+  --teal: rgb(100,210,255);
+  --yellow: rgb(255,230,32);
+  --gray2: rgb(99,99,102);
+  --gray3: rgb(72,72,74);
+  --gray4: rgb(58,58,60);
+  --gray5: rgb(44,44,46);
+  --gray6: rgb(28,28,30);
+}
 
 html {
-  font-size: 1.375em; /* 22px / 16px */
-  line-height: 1.1818182em; /* 26px / 18px */
-  background-color: #303030;
-  color: #F7f7f7;
-  font-family: "Product Sans","Helvetica Neue", Helvetica, sans-serif;
+  background-color: var(--black);
+  color: var(--white);
+  font-family: -apple-system, ".SFNSText-Regular", Helvetica, Arial, sans-serif;
+  padding: 1em; /* 16px */
+  font-size: 1.375em; /* 22px / 16px = 1.375em*/
+  line-height: 1.309em; /* 28.7984px / 22px = 1.309em*/
   font-weight: 500;
 }
 
-h1 {
-  font-size: 1.9531111em;  /*35.156px / 18px = 1.9531111em*/
-  line-height: 1.251564456em; /*44px gridline at 35.156px | 44px / 35.156px = 1.251564456em*/
-  font-weight: 600;
-  display: block;
-  text-align: center;
-}
-
-h2 {
-  font-size: 1.5625em;     /*28.125px /18px = 1.5625em*/
-  line-height: 1.1733333em; /*33px = 1.5 gridline at 28.125px*/
-  font-weight: 600;
-}
-
-span, input {
-  display: block;
-  margin-bottom: 11px; 
-}
-
-input {
-  height: 2em; 
-  font-size: inherit;
+body {
   width: 100%;
-  border: 0;
-  padding: 0;
-  background: #f7f7f7;
-  resize: none;
-  color: #000000;
-  border-radius: 0.0877924586em; /*2px | 2/22.781=0.0877924586em*/
-  text-align: center;
-  -webkit-appearance: none;
-  -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-  -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-  box-sizing: border-box;
 }
 
 #page {
-  padding: 1.18181882em; /*One gridline*/
+  width: 100%;
+  display: grid;
+  grid-row-gap: 1.309em; /* 28.7984px / 22px = 1.309em*/
+}
+
+h1 {
+  font-size: 1.714em; /* 37.698px / 22px = 1.714em */
+  line-height: 1.309em; /* 49.347px / 37.698px = 1.309em */
+  font-weight: 900; 
+}
+
+h2 {
+  font-size: 1.309em; /* 28.798px / 22px = 1.309em */
+  line-height: 1.309em; /* 28.789px / 22px = 1.309em */
+  font-weight: 700;
+}
+
+article {
+  width: 100%;
+  display: grid;
+  grid-row-gap: 1em;
+}
+
+form {
+  width: 100%;
+  display: grid;
+  grid-row-gap: 1em; /* 22px */
+}
+
+input {
+  background-color: var(--gray4);
+  color: var(--white);
+  text-align: center;
+  font-size: 1.309em; /* 28.798px / 22px = 1.309em */
+  line-height: 1.309em; /* 28.789px / 22px = 1.309em*/
+  height: 1.309em; /* 28.789px / 22px = 1.309em*/
+  border-radius: 0.3473em; /* 10px / 28.789px = 0.3473em */
+  width: 100%;
+  font-weight: 700;
+}
+
+label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  color: var(--gray);
+  height: 1.309em; /* 28.789px / 22px = 1.309em */
+  padding-left: 0.7272em; /* 16px / 22px = 0.7272em */
+  left: 0;
+  bottom: 0.2025em; /* 4.4545px / 22px = 0.2025em */
+  transition: 0.3s ease transform;
+  transform-origin: top left;
+  -moz-transition: 0.3s ease transform;
+  -webkit-transition: 0.3s ease transform;
+}
+
+ol, ul {
+  width: 100%;
+  display: grid;
+  grid-row-gap: 0.5em; /* 11px / 22px = 0.5em */
+}
+
+ol {
+  grid-template-areas: "wage reg-hours"
+                       "time-half-hours time-half-hours"
+                       "double-hours double-hours";
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1em;
+}
+
+ol li {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+}
+
+#wage-info {
+  grid-area: wage;
+}
+
+#hours-info {
+  grid-area: reg-hours;
+}
+
+#time-half-hours-info {
+  grid-area: time-half-hours;
+}
+
+#double-hours-info {
+  grid-area: double-hours;
+}
+
+.label-placeholder {
+  display: block;
+  height: 1.309em; /* 28.789px / 22px = 1.309em*/
+}
+
+input:focus ~ label, input:valid ~ label {
+  color: var(--white);
+  transform-origin: bottom;
+  transform: translateY(-130.9%) translateX(-0.7272em); /* 16px / 22px = 0.7272em */
+}
+
+#deduction-breakdown ul li {
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+}
+
+#deduction-breakdown ul li output {
+  text-align: right;
+}
+
+#paycheck,
+#gross {
+  color: var(--green);
+}
+
+#fed-withholing,
+#il-withholding,
+#medicare-withholing,
+#fed-other-withholing {
+  color: var(--orage);
+}
+
+#total-deductions {
+  color: var(--red);
 }
