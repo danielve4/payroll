@@ -11,6 +11,7 @@ class UI {
     this.medicareWithholding = document.getElementById('medicare-withholing');
     this.federalOtherWithholding = document.getElementById('fed-other-withholing');
     this.totalDeductions = document.getElementById('total-deductions');
+    this.adjustedFederal = document.getElementById('adjusted-federal');
   }
 
   getValueOf(input) {
@@ -27,6 +28,7 @@ class UI {
     this.regularHoursInput.addEventListener('input', fn)
     this.timeHalfHoursInput.addEventListener('input', fn);
     this.doubleHoursInput.addEventListener('input', fn);
+    this.adjustedFederal.addEventListener('click', fn);
   }
 }
 
@@ -53,6 +55,7 @@ class Paycheck {
     this.federalWithholding = 0.00;
     this.totalDeductions = 0.00;
     this.paycheck = 0.00;
+    this.adjustedFederal = true;
   }
 
   calculateGross() {
@@ -75,7 +78,7 @@ class Paycheck {
   calculateFederalWithholding() {
     let withholding = 0.00;
     let payGrade = this.federalRate.length;
-    let federalGross = this.gross + this.sadAlienExtra;
+    let federalGross = this.adjustedFederal ? this.gross + this.sadAlienExtra: this.gross;
     while (payGrade--) {
       if (federalGross > this.federalRate[payGrade][0]) {
         withholding = (federalGross - this.federalRate[payGrade][0]) * this.federalRate[payGrade][1] + this.federalRate[payGrade][2];
@@ -102,6 +105,7 @@ class Paycheck {
     paycheck.regularHours = ui.getValueOf(ui.regularHoursInput);
     paycheck.timeHalfHours = ui.getValueOf(ui.timeHalfHoursInput);
     paycheck.doubleHours = ui.getValueOf(ui.doubleHoursInput);
+    paycheck.adjustedFederal = ui.adjustedFederal.checked;
     paycheck.calculatePaycheck();
     ui.setValueFor(ui.paycheckOutput, paycheck.paycheck);
     ui.setValueFor(ui.gross, paycheck.gross);
