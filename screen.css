@@ -142,6 +142,27 @@ input:focus ~ label, input:valid ~ label {
   transform: translateY(-130.9%) translateX(-0.7272em); /* 16px / 22px = 0.7272em */
 }
 
-/* #paycheck {
+#deduction-breakdown ul li {
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+}
+
+#deduction-breakdown ul li output {
+  text-align: right;
+}
+
+#paycheck,
+#gross {
   color: var(--green);
-} */
+}
+
+#fed-withholing,
+#il-withholding,
+#medicare-withholing,
+#fed-other-withholing {
+  color: var(--orage);
+}
+
+#total-deductions {
+  color: var(--red);
+}
