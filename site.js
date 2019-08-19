@@ -78,7 +78,7 @@ class Paycheck {
   calculateFederalWithholding() {
     let withholding = 0.00;
     let payGrade = this.federalRate.length;
-    let federalGross = this.adjustedFederal ? this.gross + this.sadAlienExtra: this.gross;
+    let federalGross = this.adjustedFederal ? this.gross + this.sadAlienExtra : this.gross;
     while (payGrade--) {
       if (federalGross > this.federalRate[payGrade][0]) {
         withholding = (federalGross - this.federalRate[payGrade][0]) * this.federalRate[payGrade][1] + this.federalRate[payGrade][2];
@@ -97,7 +97,7 @@ class Paycheck {
   }
 }
 
-(() => {
+document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
   const paycheck = new Paycheck();
   ui.registerEventListener(() => {
@@ -115,4 +115,4 @@ class Paycheck {
     ui.setValueFor(ui.federalOtherWithholding, paycheck.fedOasdiWithholding);
     ui.setValueFor(ui.totalDeductions, paycheck.totalDeductions);
   });
-})();
+});
