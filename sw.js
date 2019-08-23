@@ -2,7 +2,9 @@ const CACHE_NAME = 'payroll-cache-v1';
 const urlsToCache = [
   '/',
   '/screen.css',
-  '/site.js'
+  '/site.js',
+  '/splashscreens/iphonexsmax_splash.png',
+  '/favicon.ico'
 ];
 
 self.addEventListener('install', event => {
