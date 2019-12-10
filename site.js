@@ -5,6 +5,7 @@ class UI {
     this.regularHoursInput = document.getElementById('regular-hours');
     this.timeHalfHoursInput = document.getElementById('time-half-hours');
     this.doubleHoursInput = document.getElementById('double-hours');
+    this.preTaxDeductionInput = document.getElementById('pre-tax-deduction');
     this.gross = document.getElementById('gross');
     this.federalWithholding = document.getElementById('fed-withholing');
     this.illinoisWithholding = document.getElementById('il-withholding');
@@ -28,6 +29,7 @@ class UI {
     this.regularHoursInput.addEventListener('input', fn)
     this.timeHalfHoursInput.addEventListener('input', fn);
     this.doubleHoursInput.addEventListener('input', fn);
+    this.preTaxDeductionInput.addEventListener('input', fn);
     this.adjustedFederal.addEventListener('click', fn);
   }
 }
@@ -48,6 +50,7 @@ class Paycheck {
     this.regularHours = 0.00;
     this.timeHalfHours = 0.00;
     this.doubleHours = 0.00;
+    this.preTaxDeduction = 0.00;
     this.gross = 0.00;
     this.medicareWithholding = 0.00;
     this.fedOasdiWithholding = 0.00;
@@ -68,9 +71,10 @@ class Paycheck {
   }
 
   calculateDeductions() {
-    this.medicareWithholding = this.gross * this.medicareRate;
-    this.fedOasdiWithholding = this.gross * this.fedOasdiRate;
-    this.illinoisWithholding = this.gross * this.illinoisRate;
+    let grossAfterPreTaxDeduction = this.gross - this.preTaxDeduction;
+    this.medicareWithholding = grossAfterPreTaxDeduction * this.medicareRate;
+    this.fedOasdiWithholding = grossAfterPreTaxDeduction * this.fedOasdiRate;
+    this.illinoisWithholding = grossAfterPreTaxDeduction * this.illinoisRate;
     this.federalWithholding = this.calculateFederalWithholding();
     return this.medicareWithholding + this.fedOasdiWithholding + this.illinoisWithholding + this.federalWithholding;
   }
@@ -78,7 +82,8 @@ class Paycheck {
   calculateFederalWithholding() {
     let withholding = 0.00;
     let payGrade = this.federalRate.length;
-    let federalGross = this.adjustedFederal ? this.gross + this.sadAlienExtra : this.gross;
+    let grossAfterPreTaxDeduction = this.gross - this.preTaxDeduction;
+    let federalGross = this.adjustedFederal ? grossAfterPreTaxDeduction + this.sadAlienExtra : grossAfterPreTaxDeduction;
     while (payGrade--) {
       if (federalGross > this.federalRate[payGrade][0]) {
         withholding = (federalGross - this.federalRate[payGrade][0]) * this.federalRate[payGrade][1] + this.federalRate[payGrade][2];
@@ -92,7 +97,7 @@ class Paycheck {
     this.gross = this.calculateGross();
     if (this.gross > 0.00) {
       this.totalDeductions = this.calculateDeductions();
-      this.paycheck = this.gross - this.totalDeductions;
+      this.paycheck = this.gross - this.preTaxDeduction - this.totalDeductions;
     } else this.paycheck = 0.00;
   }
 }
@@ -105,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
     paycheck.regularHours = ui.getValueOf(ui.regularHoursInput);
     paycheck.timeHalfHours = ui.getValueOf(ui.timeHalfHoursInput);
     paycheck.doubleHours = ui.getValueOf(ui.doubleHoursInput);
+    paycheck.preTaxDeduction = ui.getValueOf(ui.preTaxDeductionInput);
     paycheck.adjustedFederal = ui.adjustedFederal.checked;
     paycheck.calculatePaycheck();
     ui.setValueFor(ui.paycheckOutput, paycheck.paycheck);
