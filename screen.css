@@ -103,9 +103,8 @@ ol, ul {
 
 ol {
   grid-template-areas: "wage reg-hours"
-                       "time-half-hours time-half-hours"
-                       "double-hours double-hours"
-                       "pre-tax-info pre-tax-info"
+                       "time-half-hours double-hours"
+                       "pre-tax-info il-exemptions-info"
                        "adjusted-federal adjusted-federal";
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 1em;
@@ -135,6 +134,10 @@ ol li {
 
 #pre-tax-deduction-info {
   grid-area: pre-tax-info;
+}
+
+#il-exemptions-info {
+  grid-area: il-exemptions-info;
 }
 
 #adjusted-federal-info {
