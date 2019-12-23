@@ -16,8 +16,7 @@ class UI {
   }
 
   getValueOf(input) {
-    if (!(isNaN(+input.value))) return +input.value;
-    else return 0.00;
+    return !(isNaN(+input.value)) ? +input.value : 0.00;
   }
 
   setValueFor(attribute, value) {
